@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBAC Blog Application - Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+    h1, h2, h3 { color: #333; }
+    ul { margin-left: 20px; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; }
+    .section { margin-bottom: 40px; }
+  </style>
+</head>
+<body>
+
+  <h1>RBAC Blog Application - Documentation</h1>
+
+  <div class="section">
+    <h2>1. Backend</h2>
+    <p><strong>Tech Stack:</strong> Node.js, Express.js, JWT Authentication</p>
+    <h3>Features:</h3>
+    <ul>
+      <li>User Authentication using JWT (JSON Web Tokens).</li>
+      <li>Role Assignment (e.g., <code>admin</code>, <code>user</code>).</li>
+      <li>Role-Based Access Control (RBAC) Middleware:
+        <ul>
+          <li>Only admins can <code>create</code>, <code>update</code>, or <code>delete</code> blog posts.</li>
+          <li>All authenticated users can <code>read</code> blog posts.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. Frontend</h2>
+    <p><strong>Tech Stack:</strong> React.js, Axios (for API calls)</p>
+    <h3>Features:</h3>
+    <ul>
+      <li><strong>Authentication Pages</strong>:
+        <ul>
+          <li>Signup Form</li>
+          <li>Login Form</li>
+        </ul>
+      </li>
+      <li><strong>User Dashboard</strong>:
+        <ul>
+          <li>View list of blog posts.</li>
+          <li>View single blog post details.</li>
+        </ul>
+      </li>
+      <li><strong>Admin Dashboard</strong>:
+        <ul>
+          <li>Create new blog posts.</li>
+          <li>Edit existing blog posts.</li>
+          <li>Delete blog posts.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>3. Database</h2>
+    <p><strong>Options:</strong> MongoDB or PostgreSQL</p>
+    <h3>Data Models:</h3>
+    <ul>
+      <li><strong>User Model:</strong>
+        <ul>
+          <li>name: String</li>
+          <li>email: String (unique)</li>
+          <li>role: String ("user" or "admin")</li>
+          <li>password: Hashed String</li>
+        </ul>
+      </li>
+      <li><strong>Blog Post Model:</strong>
+        <ul>
+          <li>title: String</li>
+          <li>content: String</li>
+          <li>author: User Reference</li>
+          <li>timestamp: Date</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Optional Feature</h2>
+    <ul>
+      <li>Email Verification during user signup using a verification token and email link.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>5. Application Flow</h2>
+    <h3>Authentication:</h3>
+    <ol>
+      <li>User signs up with name, email, and password.</li>
+      <li>Backend hashes the password and stores user info with default role (<code>user</code>).</li>
+      <li>On login, backend verifies credentials and issues a JWT token.</li>
+    </ol>
+
+    <h3>Authorization:</h3>
+    <ol>
+      <li>Each API request includes the JWT token.</li>
+      <li>Middleware checks user role.</li>
+      <li>Allow or deny access based on role (e.g., only admins can create posts).</li>
+    </ol>
+
+    <h3>Frontend Interaction:</h3>
+    <ol>
+      <li>User accesses the login/signup page.</li>
+      <li>Upon login, token is stored (localStorage or cookie).</li>
+      <li>Users can view posts.</li>
+      <li>Admins see additional options (create, edit, delete posts).</li>
+    </ol>
+  </div>
+
+</body>
+</html>
